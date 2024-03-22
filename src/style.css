@@ -1,0 +1,159 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 80px;
+    background: gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo {
+    font-size: 2em;
+    color: beige;
+    user-select: none;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: beige;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after{
+    transform: scaleX(1);
+}
+
+
+.navigation .btnLogin-popup {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid beige;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: beige;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.navigation .btnLogin-popup:hover {
+    background: beige;
+    color: gray;
+}
+.buttons {
+    position: fixed;
+    top: 195px;
+    left: 1150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align buttons to the start of the container */
+}
+
+.buttons .btnFilter,
+.buttons .btnSort,
+.buttons .btnResultPP {
+    width: 160px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: black;
+    background: white;
+    font-weight: 500;
+    transition: .5s;
+    margin-bottom: 10px; /* Add margin between the buttons */
+}
+
+.buttons .btnReport {
+    width: 160px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid gray;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: black;
+    background: white;
+    font-weight: 500;
+    transition: .5s;
+    position: relative; /* Ensure the button's position is relative */
+    top: 50px; 
+}
+
+.container {
+    /* text-align: left; */
+    position: absolute;
+    top: 168px;
+    /*top: 20%;*/
+    left: 10%;
+    /*transform: translate(-50%, -50%); */
+    display: flex;
+    flex-direction: row;
+    align-items:center /* Align items vertically in the center */
+}
+
+.select-container {
+    text-align: left;
+    margin-right: 20px; 
+    /* flex: 1;  Make flex-grow to fill available space equally */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; 
+}
+
+select {
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0; /* Added to reset margin */
+
+}
+
+/* Style the arrow icon */
+select::after {
+    content: "\25BC"; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+

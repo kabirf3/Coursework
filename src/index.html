@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>My website</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <header>
+        <h2 class="logo">BBB</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">Contact</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="select-container">
+            <label for="continentSelect">Select Continent</label>
+            <select id="continentSelect">
+                <option value="All">All Continents</option>
+            </select>
+        </div>
+
+        <div class="select-container">
+            <label for="regionSelect">Select Region</label>
+            <select id="regionSelect">
+                <option value="All">All Regions</option>
+            </select>
+        </div>
+    
+        <div class="select-container">
+            <label for="countrySelect">Select Country</label>
+            <select id="countrySelect">
+                <option value="All">All Countries</option>
+                <option value="Turkey">Turkey</option>
+                <option value="France">France</option>
+            </select>
+        </div>
+
+        <div class="select-container">
+          <label for="citySelect">Select City</label>
+          <select id="citySelect">
+              <option value="All">All Cities</option>
+              <option value="Istanbul">Istanbul</option>
+              <option value="Paris">Paris</option>
+              <option value="London">London</option>
+          </select>
+      </div>
+
+      <div class="select-container">
+        <label for="districtSelect">Select District</label>
+        <select id="districtSelect">
+            <option value="All">All Districts</option>
+            <option value="Beylikduzu">Beylikduzu</option>
+            <option value="Wembley">Wembley</option>
+        </select>
+    </div>
+
+    </div>
+    
+
+    <div class="buttons">
+      <button class="btnFilter">Filter</button>
+      <button class="btnSort">Sort</button>
+      <button class="btnResultPP">Result per page</button>
+      <button class="btnReport">Get Report</button>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+
+</html>
