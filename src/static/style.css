@@ -25,6 +25,31 @@ header {
     user-select: none;
 }
 
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.navigation input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid beige;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+.user-menu {
+    width: 45px;
+    height: 45px;
+}
+
+.user-menu i {
+    top: 0;
+    right: 0;
+    font-size: 45px; /* Adjust icon size */
+    color: #333; /* Adjust icon color */
+}
+/*
 .navigation a {
     position: relative;
     font-size: 1.1em;
@@ -70,7 +95,7 @@ header {
 .navigation .btnLogin-popup:hover {
     background: beige;
     color: gray;
-}
+} */
 .buttons {
     position: fixed;
     top: 195px;
