@@ -2,12 +2,13 @@
 // Chosen unit test was for dethRegions
 
 // Importing the fetchRegions functions from the file where it's defined
-const fetchRegions = require('./your_file_name');
+const fetchRegions = require('./src/script.js');
 
 // Mock the fetch function using Jest's mocking capabilities
 // To be able to use Jest make sure to write "npm i jest --save-dev"
 global.fetch = jest.fn(() =>
   Promise.resolve({
+    // Ali please change this part too 
     json: () => Promise.resolve(['Region1', 'Region2']) // Mock the response JSON data
   })
 );
@@ -22,6 +23,8 @@ TextDecoderStream('fetchRegions populates region select box with fetched regions
 
     // Check if the region sleect box is populated with the fetched regions
     const regionSelect = document.getElementById('regionSelect');
+
+    // Ali please change this part
     expect(regionSelect.innerHTML).toContain('<option value="Region1">Region1</option>');
     expect(regionSelect.innerHTML).toContain('<option value="Region2">Region2</option>');
 });
