@@ -10,7 +10,7 @@ jobs:
     working_directory: ~/project/src
     steps:
       - checkout:
-          path: ~/project
+          path: ~/projectnd
       - node/install-packages:
           pkg-manager: npm
       - run:
