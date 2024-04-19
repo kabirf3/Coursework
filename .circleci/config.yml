@@ -16,7 +16,7 @@ jobs:
       - run:
           name: change directory
           command: cd src
-          
+      - run: 
           name: Run tests
           command: npm test
 
