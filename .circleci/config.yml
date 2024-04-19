@@ -9,7 +9,7 @@ jobs:
   test-node:
     # Install node dependencies and run tests
     executor: node/default
-    working_directory: ./src/
+    working_directory: ./src/src/
     steps:
       - checkout
       - node/install-packages:
