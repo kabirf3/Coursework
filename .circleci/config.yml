@@ -9,12 +9,14 @@ jobs:
   test-node:
     # Install node dependencies and run tests
     executor: node/default
-    working_directory: ./src/src/
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - run:
+          name: change directory
+          command: cd src
+          
           name: Run tests
           command: npm test
 
