@@ -1,6 +1,6 @@
 
 # Stacks detected: deps:node:src
-# version: 2.1
+version: 2.1
 
 orbs:
   node: circleci/node@5
