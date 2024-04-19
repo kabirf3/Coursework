@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "node script.js",
-    "dev": "nodemon -e js,css --exec node index.js",
+    "dev": "nodemon -e js,css --exec node script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
