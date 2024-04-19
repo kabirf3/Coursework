@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node script.js",
     "dev": "nodemon -e js,css --exec node script.js",
-    "test": "jest --config ./Test/jest.config.js"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
