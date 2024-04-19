@@ -9,7 +9,7 @@ jobs:
   test-node:
     # Install node dependencies and run tests
     executor: node/default
-    working_directory:: ~/Coursework/src
+    working_directory: ~/Coursework/src
     steps:
       - checkout:
           path: ~/Coursework
