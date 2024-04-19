@@ -13,12 +13,11 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: npm
-      - run:
-          name: change directory
-          command: cd src
       - run: 
           name: Run tests
-          command: npm test
+          command: |
+            cd src
+            npm test
 
 workflows:
   build-and-test:
