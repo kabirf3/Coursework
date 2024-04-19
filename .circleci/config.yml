@@ -1,35 +1,24 @@
 
-#This config was automatically generated from your source code
- Stacks detected: deps:node:src
-version: 2.1
+# Stacks detected: deps:node:src
+# version: 2.1
+
 orbs:
   node: circleci/node@5
+
 jobs:
   test-node:
-     Install node dependencies and run tests
+    # Install node dependencies and run tests
     executor: node/default
     working_directory: ~/project/src
     steps:
-      - checkout:
-          path: ~/projectnd
+      - checkout
       - node/install-packages:
           pkg-manager: npm
       - run:
           name: Run tests
-          command: echo \"No test specified in package.json\"
-  deploy:
-     #This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    #steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
-#workflows:
+          command: npm test
+
+workflows:
   build-and-test:
-    jobs: 
+    jobs:
       - test-node
-     - deploy:
-         requires:
-           - test-node 
