@@ -10,14 +10,13 @@ jobs:
     # Install node dependencies and run tests
     executor: node/default
     steps:
-      - checkout
+      - checkout:
+          path: ~/src
       - node/install-packages:
           pkg-manager: npm
       - run: 
           name: Run tests
-          command: |
-            cd src
-            npm test
+          command: npm test
 
 workflows:
   build-and-test:
