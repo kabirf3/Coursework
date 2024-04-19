@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node script.js",
     "dev": "nodemon -e js,css --exec node script.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -21,3 +21,4 @@
     "nodemon": "^2.0.20"
   }
 }
+
