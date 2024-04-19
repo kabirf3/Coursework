@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title My Website
+    link(rel="stylesheet", href="/stylesheets/style.css")
+  body
+    block content
+
+    
+
+
+app.get("/continents", (req, res) => {
+    db.execute("SELECT * FROM 'continent'", (err, rows, fields) => {
+        res.render("continent,"{data:rows});
+    })
+
+});
+
+
+app.get("/regions", (req, res) => {
+    db.execute("SELECT * FROM 'region'", (err, rows, fields) => {
+        res.render("region,"{data:rows});
+    })
+
+});
+
+app.get("/countires", (req, res) => {
+    db.execute("SELECT * FROM 'country'", (err, rows, fields) => {
+        res.render("country,"{data:rows});
+    })
+
+});
