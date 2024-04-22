@@ -4,6 +4,7 @@ import cors from 'cors'; // Import the CORS middleware
 import DatabaseService from "./services/database.service.mjs";
 
 
+
 //Setting up express
 const app = express();
 const port = 3000;

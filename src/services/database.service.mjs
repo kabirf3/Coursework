@@ -13,7 +13,7 @@ export default class DatabaseService {
     static async connect() {
         const conn = await mysql.createConnection({
             host: process.env.DATABASE_HOST || "localhost",
-            port: 8080, // MySQL port number
+            port: 3306, // MySQL port number
             user: "root",
             password: "",
             database: "world",

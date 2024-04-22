@@ -9,9 +9,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=world
+      - MYSQL_DATABASE=worldnp
     ports:
-      - 3306:3306
+      - 3307:3306
 
   webserver:
     build: ./src

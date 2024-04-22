@@ -13,9 +13,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "expresss": "^0.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.1.2",
-    "node-mocks-http": "^1.14.1"
+    "node-mocks-http": "^1.14.1",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "jest": "^29.7.0",
