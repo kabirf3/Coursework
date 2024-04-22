@@ -1,0 +1,10 @@
+extends layout
+block appContent
+    h1 Top 10 cities with highest population
+    table(border=1)
+        for item in data
+            tr  
+                td #{item.ID}
+                td #{item.Name}
+                td #{item.CountryCode}
+                td #{item.Population}
