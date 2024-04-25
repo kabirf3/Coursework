@@ -5,13 +5,8 @@ import DatabaseService from "./services/database.service.mjs";
 
 
 
-//Setting up express
 const app = express();
 const port = 3000;
-
-// Configure the Express application
-app.set('view engine', 'pug'); // Set the view engine to Pug
-app.set('views','./views'); // Set the directory for views
 
 // Enable CORS
 app.use(cors());
@@ -19,12 +14,13 @@ app.use(cors());
 // Get the directory name of the current module file
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-// Set the static files directory for serving static
+// Set the static files directory
 app.use(express.static(path.join(__dirname, "static")));
 
-// Define route handler for the root URL, rendering the 'home' view
+
+// Define route handler for the root URL
 app.get("/", (req, res) => {
-  res.render('home');
+    res.sendFile(path.join(__dirname, "static", "index.html"));
 });
 
 // Serve the script.js file
@@ -32,37 +28,72 @@ app.get("/script.js", (req, res) => {
   res.sendFile(path.join(__dirname, "script.js"));
 });
 
-//Establish connection with database
 const db = await DatabaseService.connect();
 
-// Define route handler to get continents data
 app.get("/continents", async (req, res) => {
-  const continents = await db.getCountinents(); // Retrieve continents data from the database
-  res.render("continents", {'data': continents}); // Render the 'continents' view with the data
+    const continents = await db.getCountinents();
+    res.send(continents);
 });
-// Define route handler to get regions data based on selected continent
+
 app.get("/regions", async (req, res) => {
-  const selectedContinent = req.query.continent || 'All'; // Get selected continent from request query or default to 'All'
-  const regions = await db.getRegions(selectedContinent); // Retrieve regions data from the database based on the selected continent
-  res.render("regions", {'data': regions}); // Render the 'regions' view with the data
+  const selectedContinent = req.query.continent || 'All'; // Get selected continent from request query
+  const regions = await db.getRegions(selectedContinent);
+  res.send(regions);
 });
 
-// Define route handler to get cities data
-app.get("/city", async (req, res) => {
-  const selectedCity = req.query.city || 'All'; // Get selected city from request query or default to 'All'
-  const cities = await db.getCity(selectedCity); // Retrieve cities data from the database
-  res.render("city", {'data': cities}); // Render the 'city' view with the data
+app.get("/countries", async (req, res) => {
+  const selectedRegion = req.query.region || 'All'; // Get selected region from request query
+  const countries = await db.getCountries(selectedRegion);
+  res.send(countries);
 });
 
-// Define route handler to get countries data
-app.get("/country", async (req, res) => {
-  const selectedCountry = req.query.country || 'All'; // Get selected country from request query or default to 'All'
-  const countries = await db.getcountry(selectedCountry); // Retrieve countries data from the database
-  res.render("country", {'data': countries}); // Render the 'country' view with the data
+// Get cities for a country
+app.get("/cities", async (req, res) => {
+  const selectedCountry = req.query.country || 'All';
+  const cities = await db.getCities(selectedCountry);
+  res.send(cities);
 });
 
-// Start the Express server and listen on the defined port
+// Get cities for a country
+app.get("/districts", async (req, res) => {
+  const selectedCity = req.query.city || 'All';
+  const districts = await db.getDistricts(selectedCity);
+  res.send(districts);
+});
+
+
+
+
+
+// Route to fetch population for a city
+app.get("/population", async (req, res) => {
+  const selectedCity = req.query.city || 'All';
+  const population = await db.getPopulation(selectedCity);
+  res.send({ population });
+});
+
+// Route to fetch country languages for a city
+app.get("/countryLanguage", async (req, res) => {
+  const selectedCity = req.query.city || 'All';
+  const countryLanguages = await db.getCountryLanguages(selectedCity);
+  res.send({ countryLanguages });
+});
+
+
+
+
+app.get("/report", async (req, res) => {
+  const { continent, region, country, city, district, filter, sort } = req.query;
+
+  // Use your database service methods to fetch the data based on the provided parameters
+  const reportData = await db.generateReport(continent, region, country, city, district, filter, sort);
+
+  res.json(reportData); // Send the fetched data as JSON
+});
+
+
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
-

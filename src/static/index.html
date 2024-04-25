@@ -9,7 +9,7 @@
     <title>My website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 
@@ -47,8 +47,6 @@
             <label for="countrySelect">Select Country</label>
             <select id="countrySelect">
                 <option value="All">All Countries</option>
-                <option value="Turkey">Turkey</option>
-                <option value="France">France</option>
             </select>
         </div>
 
@@ -56,9 +54,6 @@
           <label for="citySelect">Select City</label>
           <select id="citySelect">
               <option value="All">All Cities</option>
-              <option value="Istanbul">Istanbul</option>
-              <option value="Paris">Paris</option>
-              <option value="London">London</option>
           </select>
       </div>
 
@@ -66,20 +61,70 @@
         <label for="districtSelect">Select District</label>
         <select id="districtSelect">
             <option value="All">All Districts</option>
-            <option value="Beylikduzu">Beylikduzu</option>
-            <option value="Wembley">Wembley</option>
         </select>
+      </div>
+
+
+      <!-- Table for Report -->
+      <div class="report-container" id="reportContainer">
+        <h3>Report Table</h3>
+        <table class="report-table" id="reportTable">
+            <thead>
+                <tr>
+                    <th>Continent</th>
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>District</th>
+                    <th>Population</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be populated dynamically -->
+            </tbody>
+        </table>
+      </div>
     </div>
 
-    </div>
     
 
     <div class="buttons">
       <button class="btnFilter">Filter</button>
+      <!-- The modal for filter options -->
+    <div class="modal" id="filterModal">
+        <div class="modal-content">
+            <label for="filterSelect">Filter By:</label>
+            <select id="filterSelect">
+                <option value="population">Population</option>
+                <option value="countryLanguage">Country Language</option>
+            </select>
+            <button class="btnApplyFilter">Apply</button>
+        </div>
+    </div>
+    <!-- End of modal -->
+
+
       <button class="btnSort">Sort</button>
+      <!-- The modal for sort options -->
+    <div class="modal" id="sortModal">
+        <div class="modal-content">
+            <label for="sortSelect">Sort By:</label>
+            <select id="sortSelect">
+                <option value="lowToHigh">Low to High</option>
+                <option value="highToLow">High to Low</option>
+            </select>
+            <button class="btnApplySort">Apply</button>
+        </div>
+    </div>
+    <!-- End of modal -->
+
+
+
       <button class="btnResultPP">Result per page</button>
       <button class="btnReport">Get Report</button>
     </div>
+
+   
 
 
     <script src="script.js"></script>
