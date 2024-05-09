@@ -81,27 +81,7 @@ export default class DatabaseService {
         return rows;
     }
 
-    /* Get a list of districts for a specific city 
-    async getDistricts(cityID = 'All') {
-        let sql;
-        let params;
-
-        if (cityID === 'All') {
-            sql = `SELECT DISTINCT district FROM city`;
-            params = [];
-        } else {
-            sql = `SELECT DISTINCT district FROM city WHERE ID = ?`;
-            params = [cityID];
-        }
-
-        //console.log("SQL Query:", sql); // Log the SQL query before execution
-
-        const [rows, fields] = await this.conn.execute(sql, params);
-        //console.log("Returned Rows:", rows); // Log the returned rows
-
-        return rows;
-    } */
-
+    /* Get a list of districts for a specific city */
     async getDistricts(cityID = 'All') {
         let sql;
         let params;
@@ -151,61 +131,7 @@ export default class DatabaseService {
         return rows;
     }
 
-    /*async generateReport(continent, region, country, city, district, filter, sort) {
-        let sql = `
-            SELECT 
-                city.Name AS city, 
-                city.population AS population, 
-                city.District AS district,
-                country.Name AS country, 
-                country.Continent AS continent, 
-                country.Region AS region,
-                countrylanguage.Language AS language
-            FROM 
-                city
-            INNER JOIN 
-                country 
-            ON 
-                city.CountryCode = country.Code
-
-            LEFT JOIN 
-            countrylanguage 
-
-            ON 
-            city.CountryCode = countrylanguage.CountryCode
-
-            WHERE 
-                1=1
-        `;
     
-        if (continent !== 'All') {
-            sql += ` AND country.Continent = '${continent}'`;
-        }
-        if (region !== 'All') {
-            sql += ` AND country.Region = '${region}'`;
-        }
-        if (country !== 'All') {
-            sql += ` AND country.Name = '${country}'`;
-        }
-        if (city !== 'All') {
-            sql += ` AND city.Name = '${city}'`;
-        }
-        if (district !== 'All') {
-            sql += ` AND city.District = '${district}'`;
-        }
-    
-        if (sort === 'lowToHigh') {
-            sql += ` ORDER BY city.population ASC`;
-        } else if (sort === 'highToLow') {
-            sql += ` ORDER BY city.population DESC`;
-        }
-    
-        console.log("Generated SQL:", sql); // Print the generated SQL
-    
-        const [rows, fields] = await this.conn.execute(sql);
-        return rows;
-    }*/
-
     async generateReport(continent = 'All', region = 'All', country = 'All', city = 'All', district = 'All', language = 'All', filter, sort, limit) {
         let sql = `
             SELECT 
@@ -268,11 +194,11 @@ export default class DatabaseService {
             params.push(parseInt(limit)); // Convert limit to integer and add it to the parameters
         }
     
-        console.log("Generated SQL:", sql); // Print the generated SQL
-        console.log("Query parameters:", params); // Print the query parameters
+       // console.log("Generated SQL:", sql); // Print the generated SQL
+       // console.log("Query parameters:", params); // Print the query parameters
     
         const [rows, fields] = await this.conn.execute(sql, params);
-        console.log("Returned rows:", rows); // Log the returned rows
+        //console.log("Returned rows:", rows); // Log the returned rows
     
         return rows;
     }

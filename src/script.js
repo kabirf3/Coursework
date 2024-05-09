@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   continentSelect.addEventListener('change', () => {
       const selectedContinent = continentSelect.value;
 
-      // Fetch regions based on the selected continent
+    
       fetchRegions(selectedContinent);
   });
 
@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   regionSelect.addEventListener('change', () => {
       const selectedRegion = regionSelect.value;
 
-      // Fetch countries based on the selected region
       fetchCountries(selectedRegion);
   });
 
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   countrySelect.addEventListener('change', () => {
       const selectedCountry = countrySelect.value;
 
-      // Fetch cities based on the selected country
+     
       fetchCities(selectedCountry);
   });
 
@@ -59,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
   citySelect.addEventListener('change', () => {
       const selectedCity = citySelect.value;
 
-      // Fetch districts based on the selected city
+
       fetchDistricts(selectedCity);
   });
 
-  // Fetch all cities initially
+ 
   fetchCities('All');
 });
 
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function fetchRegions(selectedContinent) {
   const regionSelect = document.getElementById('regionSelect');
 
-  // Fetch regions based on the selected continent
   fetch(`http://localhost:3000/regions?continent=${selectedContinent}`)
       .then(response => response.json())
       .then(regions => {
@@ -102,20 +100,20 @@ function fetchRegions(selectedContinent) {
 function fetchCountries(selectedRegion) {
   const countrySelect = document.getElementById('countrySelect');
 
-  // Fetch countries based on the selected region
+
   fetch(`http://localhost:3000/countries?region=${selectedRegion}`)
       .then(response => response.json())
       .then(countries => {
-          // Clear existing options
+       
           countrySelect.innerHTML = '';
 
-          // Add default option for all countries
+      
           const defaultOptionAll = document.createElement('option');
           defaultOptionAll.value = 'All';
           defaultOptionAll.text = 'All Countries';
           countrySelect.appendChild(defaultOptionAll);
 
-          // Add fetched countries to the country combobox
+   
           countries.forEach(country => {
               const option = document.createElement('option');
               option.value = country.code;
@@ -123,7 +121,7 @@ function fetchCountries(selectedRegion) {
               countrySelect.appendChild(option);
           });
 
-          // Populate cities with 'All' as default
+     
           fetchCities('All');
       })
       .catch(error => console.error('Error fetching countries:', error));
@@ -133,11 +131,11 @@ function fetchCountries(selectedRegion) {
 function fetchCities(selectedCountry) {
   const citySelect = document.getElementById('citySelect');
 
-  // Fetch cities based on the selected country
+
   fetch(`http://localhost:3000/cities?country=${selectedCountry}`)
       .then(response => response.json())
       .then(cities => {
-          // Clear existing options
+         
           citySelect.innerHTML = '';
 
           // Add default option for all cities
@@ -154,7 +152,7 @@ function fetchCities(selectedCountry) {
               citySelect.appendChild(option);
           });
 
-          // Populate districts with 'All' as default
+      
           fetchDistricts('All');
       })
       .catch(error => console.error('Error fetching cities:', error));
@@ -252,10 +250,10 @@ applySortButton.addEventListener('click', () => {
   const selectedSort = sortSelect.value;
   const selectedCity = citySelect.value;
 
-  // Fetch data based on selected sorting
+
   fetchSortedData(selectedCity, selectedSort);
 
-  // Close the modal
+
   sortModal.style.display = 'none';
 });
 
@@ -296,7 +294,7 @@ applyResultButton.addEventListener('click', () => {
   }
 
   const selectedCity = citySelect.value;
-  const selectedFilter = filterSelect.value; // Define selectedFilter here
+  const selectedFilter = filterSelect.value; 
 
   // Fetch data based on selected city, filter, and the number of lines
   fetchData(selectedCity, selectedFilter, numLines);
@@ -308,9 +306,6 @@ async function fetchData(selectedCity, selectedFilter, numLines) {
   if (selectedFilter === 'population') {
       url = `http://localhost:3000/population?city=${selectedCity}&limit=${numLines}`;
   } else if (selectedFilter === 'countryLanguage') {
-      //const countryLanguages = await db.getCountryLanguages(selectedCity);
-      //console.log(countryLanguages); // Display or process country languages as needed
-      //return; // No need to fetch data from server for country language filter
       url = `http://localhost:3000/countryLanguage?countryCode=${selectedCity}&limit=${numLines}`;
 
   }
@@ -382,44 +377,29 @@ $(document).ready(function () {
       // Show the report container when button is clicked
       $('#reportContainer').css('display', 'block');
   });
+
+
+
+
+  // User Icon Menu
+  const userIcon = document.getElementById("userIcon");
+  const userMenu = document.getElementById("userMenu");
+
+  userIcon.addEventListener("click", function(event) {
+    console.log("User icon clicked");
+    userMenu.classList.toggle("show");
+    event.stopPropagation(); // Stop propagation to prevent the window click event
 });
 
+window.addEventListener("click", function(event) {
+    console.log("Window clicked");
+    if (!event.target.matches("#userIcon") && !event.target.matches("#userMenu")) {
+        userMenu.classList.remove("show");
+    }
+});
 
-
-
-
-
-
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  var menu = document.getElementById("userMenu");
-  var logo = document.querySelector(".logo");
-
-  // Function to toggle menu visibility
-  function toggleMenu() {
-      if (menu.style.display === "block") {
-          menu.style.display = "none";
-      } else {
-          menu.style.display = "block";
-      }
-  }
-
-  // Click event listener for the logo
-  logo.addEventListener("click", function(event) {
-      // Toggle the visibility of the menu
-      toggleMenu();
-      // Prevent default behavior to avoid unwanted page navigation
-      event.preventDefault();
-      event.stopPropagation(); // Stop the event from bubbling up
-  });
-
-  // Click event listener for the window
-  window.addEventListener("click", function() {
-      // Close the menu when clicking outside of it
-      menu.style.display = "none";
-  });
+userMenu.addEventListener("click", function(event) {
+    console.log("User menu clicked");
+    event.stopPropagation();
+});
 });
