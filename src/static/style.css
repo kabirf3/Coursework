@@ -51,62 +51,13 @@ header {
     font-size: 45px; /* Adjust icon size */
     color: #333; /* Adjust icon color */
 }
-/*
-.navigation a {
-    position: relative;
-    font-size: 1.1em;
-    color: beige;
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 40px;
-}
-
-.navigation a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 3px;
-    background: beige;
-    border-radius: 5px;
-    transform: scaleX(0);
-    transition: transform .5s;
-}
-
-.navigation a:hover::after{
-    transform: scaleX(1);
-}
-
-
-.navigation .btnLogin-popup {
-    width: 130px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid beige;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: beige;
-    font-weight: 500;
-    margin-left: 40px;
-    transition: .5s;
-}
-
-.navigation .btnLogin-popup:hover {
-    background: beige;
-    color: gray;
-} */ 
-
-
 
 
 
 .buttons {
     position: fixed;
     top: 195px;
-    right: 160px;/*left: 1150px;*/
+    right: 70px;/*left: 1150px;*/
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* Align buttons to the start of the container */
@@ -169,7 +120,7 @@ label {
 }
 
 select {
-    width: 165px; 
+    width: 180px; 
     height: 60px; 
     padding: 10px;
     font-size: 16px;
@@ -276,5 +227,67 @@ select::after {
 }
 
 .report-table th {
+    background-color: #f2f2f2;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: gray;
+    padding: 8px 0;
+    color: white;
+    z-index: 999; /* Ensure footer is above other content */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    width: 20%; /* Adjust width as needed */
+}
+
+.footer-section h3 {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+
+.navigation .user-menu ul {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    top: 100%; /* Position the menu below the logo */
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1; /* Ensure menu is above other content */
+    display: none; /* Hide the menu by default */
+}
+
+.navigation .user-menu ul li {
+    padding: 10px;
+}
+
+.navigation .user-menu ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation .user-menu ul li a:hover {
     background-color: #f2f2f2;
 }

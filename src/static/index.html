@@ -24,6 +24,12 @@
                 <!-- For now, let's just use a placeholder icon -->
                 <!--<img src="profile.jpg" alt=""> -->
                 <i class="fas fa-user"></i>
+
+                <ul>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Log out</a></li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -77,6 +83,7 @@
                     <th>City</th>
                     <th>District</th>
                     <th>Population</th>
+                    <th>Country Language</th>
                 </tr>
             </thead>
             <tbody>
@@ -120,10 +127,43 @@
 
 
 
-      <button class="btnResultPP">Result per page</button>
+      <button class="btnResultPP">Result per line</button>
+
+      <div class="modal" id="ResultPPModal">
+        <div class="modal-content">
+            <label for="lineInput">Number of Lines:</label>
+            <input type="number" id="lineInput" placeholder="Enter number of lines">
+            <button class="btnApplyResult">Apply</button>
+        </div>
+    </div>
+
       <button class="btnReport">Get Report</button>
     </div>
 
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <!-- Add your contact information here -->
+            </div>
+            <div class="footer-section">
+                <h3>Social Media</h3>
+                <!-- Add your social media links here -->
+            </div>
+            <div class="footer-section">
+                <h3>Privacy Policy & Terms of Service</h3>
+                <!-- Add links to your privacy policy and terms of service here -->
+            </div>
+            
+            <div class="footer-section">
+                <h3>BBB 2024</h3>
+                <!-- Add any additional information or links related to BBB here -->
+            </div>
+        </div>
+    </footer>
    
 
 

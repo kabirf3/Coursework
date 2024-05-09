@@ -81,7 +81,7 @@ export default class DatabaseService {
         return rows;
     }
 
-    /* Get a list of districts for a specific city */
+    /* Get a list of districts for a specific city 
     async getDistricts(cityID = 'All') {
         let sql;
         let params;
@@ -90,8 +90,8 @@ export default class DatabaseService {
             sql = `SELECT DISTINCT district FROM city`;
             params = [];
         } else {
-            sql = `SELECT DISTINCT district FROM city WHERE name = ?`;
-            params = [city.Name];
+            sql = `SELECT DISTINCT district FROM city WHERE ID = ?`;
+            params = [cityID];
         }
 
         //console.log("SQL Query:", sql); // Log the SQL query before execution
@@ -100,6 +100,26 @@ export default class DatabaseService {
         //console.log("Returned Rows:", rows); // Log the returned rows
 
         return rows;
+    } */
+
+    async getDistricts(cityID = 'All') {
+        let sql;
+        let params;
+    
+        if (cityID === 'All') {
+            sql = `SELECT DISTINCT district FROM city`;
+            params = [];
+        } else {
+            sql = `SELECT DISTINCT district FROM city WHERE id = ?`; // Assuming 'id' is the primary key of the city table
+            params = [cityID];
+        }
+    
+        const [rows, fields] = await this.conn.execute(sql, params);
+        
+        // Extract the districts from the rows array
+        const districts = rows.map(row => row.district);
+    
+        return districts;
     }
 
     /* Get population for a specific city */
@@ -112,7 +132,26 @@ export default class DatabaseService {
         return rows[0].population;
     }
 
-    async generateReport(continent, region, country, city, district, filter, sort) {
+    async getCountryLanguages(selectedCity, limit = null) {
+        let sql = `
+            SELECT Language, IsOfficial, Percentage
+            FROM countryLanguage
+            WHERE CountryCode = (
+                SELECT CountryCode FROM city WHERE Name = ?
+            )
+        `;
+        const params = [selectedCity];
+    
+        if (limit && !isNaN(limit)) {
+            sql += ` LIMIT ?`; // Add LIMIT clause to the SQL query
+            params.push(parseInt(limit)); // Convert limit to integer and add it to the parameters
+        }
+    
+        const [rows, fields] = await this.conn.execute(sql, params);
+        return rows;
+    }
+
+    /*async generateReport(continent, region, country, city, district, filter, sort) {
         let sql = `
             SELECT 
                 city.Name AS city, 
@@ -157,11 +196,71 @@ export default class DatabaseService {
     
         const [rows, fields] = await this.conn.execute(sql);
         return rows;
+    }*/
+
+    async generateReport(continent, region, country, city, district, filter, sort, limit) {
+        let sql = `
+            SELECT 
+                city.Name AS city, 
+                city.population AS population, 
+                city.District AS district,
+                country.Name AS country, 
+                country.Continent AS continent, 
+                country.Region AS region
+            FROM 
+                city
+            INNER JOIN 
+                country 
+            ON 
+                city.CountryCode = country.Code
+            WHERE 
+                1=1
+        `;
+    
+        const params = [];
+    
+        if (continent !== 'All') {
+            sql += ` AND country.Continent = ?`;
+            params.push(continent);
+        }
+        if (region !== 'All') {
+            sql += ` AND country.Region = ?`;
+            params.push(region);
+        }
+        if (country !== 'All') {
+            sql += ` AND country.Name = ?`;
+            params.push(country);
+        }
+        if (city !== 'All') {
+            sql += ` AND city.Name = ?`;
+            params.push(city);
+        }
+        if (district !== 'All') {
+            sql += ` AND city.District = ?`;
+            params.push(district);
+        }
+    
+        if (sort === 'lowToHigh') {
+            sql += ` ORDER BY city.population ASC`;
+        } else if (sort === 'highToLow') {
+            sql += ` ORDER BY city.population DESC`;
+        }
+
+        if (limit && !isNaN(limit)) {
+            sql += ` LIMIT ?`; // Add LIMIT clause to the SQL query
+            params.push(parseInt(limit)); // Convert limit to integer and add it to the parameters
+        }
+    
+        console.log("Generated SQL:", sql); // Print the generated SQL
+        console.log("Query parameters:", params); // Print the query parameters
+    
+        const [rows, fields] = await this.conn.execute(sql, params);
+        console.log("Returned rows:", rows); // Log the returned rows
+    
+        return rows;
     }
     
     
     
-    
-    
-    
+
 }
