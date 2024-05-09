@@ -134,8 +134,8 @@ export default class DatabaseService {
 
     async getCountryLanguages(selectedCity, limit = null) {
         let sql = `
-            SELECT Language, IsOfficial, Percentage
-            FROM countryLanguage
+            SELECT Language
+            FROM countrylanguage
             WHERE CountryCode = (
                 SELECT CountryCode FROM city WHERE Name = ?
             )
@@ -159,13 +159,21 @@ export default class DatabaseService {
                 city.District AS district,
                 country.Name AS country, 
                 country.Continent AS continent, 
-                country.Region AS region
+                country.Region AS region,
+                countrylanguage.Language AS language
             FROM 
                 city
             INNER JOIN 
                 country 
             ON 
                 city.CountryCode = country.Code
+
+            LEFT JOIN 
+            countrylanguage 
+
+            ON 
+            city.CountryCode = countrylanguage.CountryCode
+
             WHERE 
                 1=1
         `;
@@ -198,7 +206,7 @@ export default class DatabaseService {
         return rows;
     }*/
 
-    async generateReport(continent, region, country, city, district, filter, sort, limit) {
+    async generateReport(continent = 'All', region = 'All', country = 'All', city = 'All', district = 'All', language = 'All', filter, sort, limit) {
         let sql = `
             SELECT 
                 city.Name AS city, 
@@ -206,13 +214,18 @@ export default class DatabaseService {
                 city.District AS district,
                 country.Name AS country, 
                 country.Continent AS continent, 
-                country.Region AS region
+                country.Region AS region,
+                countrylanguage.Language AS language
             FROM 
                 city
             INNER JOIN 
                 country 
             ON 
                 city.CountryCode = country.Code
+            INNER JOIN 
+                countrylanguage 
+            ON 
+                countrylanguage.CountryCode = country.Code
             WHERE 
                 1=1
         `;
@@ -246,6 +259,10 @@ export default class DatabaseService {
             sql += ` ORDER BY city.population DESC`;
         }
 
+        if (language !== 'All') {
+            sql += ` AND countrylanguage.Language = ?`;
+            params.push(language);
+        }
         if (limit && !isNaN(limit)) {
             sql += ` LIMIT ?`; // Add LIMIT clause to the SQL query
             params.push(parseInt(limit)); // Convert limit to integer and add it to the parameters

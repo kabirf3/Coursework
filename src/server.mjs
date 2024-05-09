@@ -75,9 +75,8 @@ app.get("/population", async (req, res) => {
 // Route to fetch country languages for a city
 app.get("/countryLanguage", async (req, res) => {
   const selectedCity = req.query.city || 'All';
-  const limit = req.query.limit || null; // Get the optional limit query parameter
+  const countryLanguages = await db.getCountryLanguages(selectedCity);
 
-  const countryLanguages = await db.getCountryLanguages(selectedCity, limit);
   res.send({ countryLanguages });
 });
 
@@ -85,7 +84,7 @@ app.get("/countryLanguage", async (req, res) => {
 
 
 app.get("/report", async (req, res) => {
-  const { continent, region, country, city, district, filter, sort, limit } = req.query;
+  const { continent, region, country, city, district, language, filter, sort, limit } = req.query;
 
   console.log('Received parameters:');
   console.log('Continent:', continent);
@@ -93,10 +92,11 @@ app.get("/report", async (req, res) => {
   console.log('Country:', country);
   console.log('City:', city);
   console.log('District:', district);
+  console.log('Country Language:', language)
   console.log('Limit:', limit);
 
   // Use your database service methods to fetch the data based on the provided parameters
-  const reportData = await db.generateReport(continent, region, country, city, district, filter, sort, limit);
+  const reportData = await db.generateReport(continent, region, country, city, district, language, filter, sort, limit);
 
   console.log('Generated report data:', reportData);
 

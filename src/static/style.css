@@ -57,7 +57,7 @@ header {
 .buttons {
     position: fixed;
     top: 195px;
-    right: 70px;/*left: 1150px;*/
+    right: 40px;/*left: 1150px;*/
     display: flex;
     flex-direction: column;
     align-items: flex-end; /* Align buttons to the start of the container */
@@ -120,7 +120,7 @@ label {
 }
 
 select {
-    width: 180px; 
+    width: 188px; 
     height: 60px; 
     padding: 10px;
     font-size: 16px;

@@ -311,7 +311,7 @@ async function fetchData(selectedCity, selectedFilter, numLines) {
       //const countryLanguages = await db.getCountryLanguages(selectedCity);
       //console.log(countryLanguages); // Display or process country languages as needed
       //return; // No need to fetch data from server for country language filter
-      url = `http://localhost:3000/countryLanguage?city=${selectedCity}&limit=${numLines}`;
+      url = `http://localhost:3000/countryLanguage?countryCode=${selectedCity}&limit=${numLines}`;
 
   }
 
@@ -370,7 +370,7 @@ function populateTable(data) {
           <td>${rowData.city}</td>
           <td>${rowData.district}</td>
           <td>${rowData.population}</td>
-          <td>${rowData.countryLanguages}</td>
+          <td>${rowData.language}</td>
       `;
       tbody.appendChild(row);
   });
